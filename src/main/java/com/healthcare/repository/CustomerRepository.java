@@ -8,7 +8,7 @@ import com.healthcare.claim.model.Customer;
 public class CustomerRepository {
 	
 	public Customer saveCustomer(Customer customer) {
-		// repository
+		// repository--DAO--> isolation DB interactions from other layers application 
 		return null;
 	}
 
