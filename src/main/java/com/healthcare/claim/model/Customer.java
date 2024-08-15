@@ -5,6 +5,7 @@ public class Customer {
 	private String firstName;
 	private String lastName;
 	private String address;
+	private int zipcode;
 	
 	
 	public int getId() {
@@ -31,6 +32,14 @@ public class Customer {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public int getZipcode() {
+		return zipcode;
+	}
+	public void setZipcode(int zipcode) {
+		this.zipcode = zipcode;
+	}
+	
+	
 	
 
 }
