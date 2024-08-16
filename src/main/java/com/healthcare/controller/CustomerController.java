@@ -1,4 +1,4 @@
-package com.healthcare.claim;
+package com.healthcare.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.healthcare.claim.model.Customer;
+import com.healthcare.model.Customer;
 import com.healthcare.service.CustomerService;
 
-import jakarta.websocket.server.PathParam;
 
 @RestController
 public class CustomerController {
@@ -21,13 +20,15 @@ public class CustomerController {
 	@Autowired
 	CustomerService service;
 	
+	// CustomerService service = new CustomerService();
+	
 	@GetMapping(value="{id}",produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Customer> getCustomerMessage(@PathVariable( "id") String id) {
 		
 		Customer cust1 = new Customer();
 		
 		System.out.println("id  "+id);
-		cust1.setId(Integer.parseInt(id));
+		cust1.setId(id);
 		
 		return new ResponseEntity<Customer>(cust1,HttpStatus.ACCEPTED);
 	}
@@ -35,10 +36,32 @@ public class CustomerController {
 	// 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Customer> createCustomer(@RequestBody Customer cus) {
-		
+		//Older way of mapping   we used manually or using jackson-bind jar 
+		//for the mapping incoming to the POJO/model
+		//customer cus = new Customer 
+		// cus.setter....
+		/*
+		 *  New process:  this process is replaced by @RequestBody  which used internally the REFLECTION API ..
+		 *   that means POJO class property name should match with incoming json keys 
+		 * 
+					 *   private String firstName;
+				private String lastName;
+				private String address;
+				private int zipcode;
+				==============
+					 *   {
+			    "firstName": "req1fn", 
+			    "lastName": "req1ln",
+			    "address": "2232323",
+			    "zipcode": "47777"  }
+		 */
 	
-		service.createCustomer(cus);
-		
+		service.createCustomer(cus); 
+		// when call service.anymethod for the first time it creates object, 
+		// that object will be pooled  and cached --> by default this service is singleton  
+		//  1. @RequestBody
+		//   2. ResponseEntity 
+		//  
 		return new ResponseEntity<Customer>(cus,HttpStatus.ACCEPTED);
 	}
 	

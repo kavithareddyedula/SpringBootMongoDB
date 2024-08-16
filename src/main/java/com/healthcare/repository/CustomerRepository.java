@@ -1,16 +1,17 @@
 package com.healthcare.repository;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.healthcare.claim.model.Customer;
+import com.healthcare.model.Customer;
 
-@Repository
-public class CustomerRepository {
-	
-	public Customer saveCustomer(Customer customer) {
-		// repository--DAO--> isolation DB interactions from other layers application 
-		return null;
-	}
+/**
+ *  DAO - data access object -- isolates DB interactions from other layers of the app 
+ *  org.springframework.data --> spring data module  --> 
+ *  
+ *  public interface CustomerRepository extends MongoRepository<Model/entity, primarykeydatatype>{
+ *  
+ */
 
+public interface CustomerRepository extends MongoRepository<Customer, String>{
 
 }

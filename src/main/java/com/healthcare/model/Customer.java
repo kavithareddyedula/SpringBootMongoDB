@@ -1,18 +1,24 @@
-package com.healthcare.claim.model;
+package com.healthcare.model;
 
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document("Customer")
 public class Customer {
-	private int Id;
+	@Id
+	private String id;
 	private String firstName;
 	private String lastName;
 	private String address;
 	private int zipcode;
 	
 	
-	public int getId() {
-		return Id;
+	public String getId() {
+		return id;
 	}
-	public void setId(int id) {
-		Id = id;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getFirstName() {
 		return firstName;
