@@ -3,8 +3,10 @@ package com.healthcare;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+//@EnableAspectJAutoProxy(proxyTargetClass=false)
 public class SpringBootMongoDBApplication {
 
 	public static void main(String[] args) {
